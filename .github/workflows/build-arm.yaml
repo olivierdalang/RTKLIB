@@ -1,0 +1,23 @@
+on: [push]
+
+jobs:
+  arm_job:
+    runs-on: ubuntu-18.04
+    name: Build on ARM
+    steps:
+      - uses: actions/checkout@v1.0.0
+
+      - uses: uraimo/run-on-arch-action@v1.0.8
+        id: runcmd
+        with:
+          architecture: armv6
+          distribution: buster
+          run: |
+            cd app
+            make
+
+      - name: Save binaries
+        uses: actions/upload-artifact@v1
+        with:
+            name: str2str
+            path: /usr/local/bin/str2str
