@@ -13,6 +13,7 @@ jobs:
           architecture: armv6
           distribution: buster
           run: |
+            apt-get install -y build-essential
             cd app
             make
 
